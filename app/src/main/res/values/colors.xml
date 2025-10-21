@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="dim_black">#33000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple_100">#7647EF</color>
+    <color name="rescue_red">#FF344D</color>
+    <color name="chat_bubble_red">#F31D00</color>
+    <color name="change_route">#FF0000</color>
+    <color name="danger_dialog_bg">#26770000</color>
+    <color name="chat_other">#FFD45C</color>
+    <color name="text_add_yellow">#F6FF00</color>
+    <color name="gray_50">#F3F4FA</color>
+    <color name="gray_100">#EEF1FA</color>
+    <color name="gray_200">#D9DDEA</color>
+    <color name="gray_300">#BEC3D7</color>
+    <color name="gray_400">#8990A9</color>
+    <color name="gray_500">#63697C</color>
+    <color name="gray_600">#454958</color>
+    <color name="gray_800">#2F323D</color>
+    <color name="gray_950">#121212</color>
+</resources>

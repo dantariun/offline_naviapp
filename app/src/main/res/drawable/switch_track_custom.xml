@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:drawable="@drawable/track_enabled"
+                android:width="34.5dp"
+                android:height="17.5dp"/>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item android:drawable="@drawable/track_disabled"
+                android:width="34.5dp"
+                android:height="17.5dp"/>
+        </layer-list>
+    </item>
+</selector>
