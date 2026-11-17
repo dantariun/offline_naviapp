@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="#000000">
+
+    <path
+        android:name="outer_circle_fill"
+        android:fillColor="@android:color/white"
+        android:pathData="M480,920Q389,920 308.5,885.5Q228,851 168.5,791.5Q109,732 74.5,651.5Q40,571 40,480Q40,388 74.5,308Q109,228 168.5,168.5Q228,109 308.5,74.5Q389,40 480,40Q572,40 652,74.5Q732,109 791.5,168.5Q851,228 885.5,308Q920,388 920,480Q920,571 885.5,651.5Q851,732 791.5,791.5Q732,851 652,885.5Q572,920 480,920Z"/>
+
+    <path
+        android:name="background_hole"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M480,840Q329,840 224.5,735.5Q120,631 120,480Q120,329 224.5,224.5Q329,120 480,120Q631,120 735.5,224.5Q840,329 840,480Q840,631 735.5,735.5Q631,840 480,840Z"/>
+
+    <path
+        android:name="diamond_and_arrow"
+        android:fillColor="@android:color/white"
+        android:pathData="M455,791L167,503Q157,493 157,479Q157,465 167,455L455,167Q465,157 478,157Q491,157 501,167L789,455Q799,465 799,479Q799,493 789,503L501,791Q491,801 478,801Q465,801 455,791ZM319,599L319,439Q319,421 330,410Q341,399 359,399L525,399L483,355L539,299L679,439L539,579L483,523L525,479L399,479L399,599L319,599Z"/>
+
+</vector>

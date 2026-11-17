@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:layout_width="256dp">
+
+        <TextView
+            android:id="@+id/text_complete_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="21.5dp"
+            android:gravity="center"
+            android:textColor="@color/gray_950"
+            android:text="Switched to\nsatellite mode"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_complete_sub"
+            />
+
+        <TextView
+            android:id="@+id/text_complete_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="10dp"
+            android:gravity="center"
+            android:textColor="@color/gray_950"
+            android:text="In case of emergency, Fuit will protect you."
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@+id/text_complete_title"
+            app:layout_constraintBottom_toTopOf="@+id/image_dialog_sat_complete"
+            />
+
+        <ImageView
+            android:id="@+id/image_dialog_sat_complete"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/image_complete"
+            android:layout_marginTop="30dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@+id/text_complete_sub"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:max="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,96 +1,28 @@
-# offline_naviapp
-
-인터넷 없이 동작하는 Android 오프라인 내비게이션 앱. 대한민국 OSM 지도 데이터를 앱에 번들로 내장하고, GraphHopper 엔진으로 경로를 계산한다. 재난 위험 구역(Shadow Zone)을 회피하는 경로 탐색 기능을 포함한다.
-
-## Stack
-
-![Kotlin](https://img.shields.io/badge/Kotlin-Android-7F52FF)
-![GraphHopper](https://img.shields.io/badge/Routing-GraphHopper-green)
-![OSMDroid](https://img.shields.io/badge/Map-OSMDroid-blue)
-![Hilt](https://img.shields.io/badge/DI-Hilt-orange)
-![Room](https://img.shields.io/badge/DB-Room-green)
-
-- **지도**: OSMDroid (OpenStreetMap)
-- **경로 계산**: GraphHopper Core (오프라인)
-- **지도 데이터**: 대한민국 OSM PBF 번들 (`south-korea-251016.osm.pbf`)
-- **DI**: Hilt
-- **DB**: Room (Shadow Zone, Tile 정보 저장)
-- **상태 관리**: Coroutines + Flow + ViewModel
-- **네트워크**: Retrofit (온라인 Geocoding 보조)
-- **저장소**: DataStore
-- **빌드**: compileSdk 35, minSdk 28, ViewBinding
+# GraphHopper & osmdroid 기반 오프라인 내비게이션 프로토타입
+본 프로젝트는 네트워크 연결 없이도 지도를 표시하고 경로를 탐색할 수 있는 안드로이드 오프라인 내비게이션 앱의 핵심 기능을 구현한 프로토타입입니다. osmdroid를 통해 오프라인 지도 타일(MBTiles)을 렌더링하고, GraphHopper 라우팅 엔진을 연동하여 경로 계산 및 기본 주행 안내 기능을 구현했습니다.
 
 ## 주요 기능
+- 온라인/오프라인 지도 렌더링: OpenstreetMap 기반의 지도 타일을 로컬에 저장하여 인터넷 연결이 불안정한 상황에서도 선명한 지도를 표시합니다.
 
-### 오프라인 경로 탐색
-- 대한민국 OSM 지도 데이터를 앱 내 번들로 내장 → 인터넷 없이 경로 계산
-- GraphHopper 엔진 초기화 (`InitGraphHopperUseCase`)
-- 출발지–목적지 경로 탐색 (`FindRouteUseCase`)
-- 경유지 포함 다중 경로 탐색 (`FindRouteWithWaypointsUseCase`)
+- 오프라인 경로 탐색: GraphHopper 엔진과 사전 빌드된 라우팅 데이터를 사용해 출발지와 목적지 사이의 최적 경로를 오프라인으로 계산합니다.
 
-### 재난 위험 구역 회피
-- Shadow Zone(위험 구역) DB 저장 및 관리
-- 위험 구역 회피 경로 탐색 (`FindRouteAvoidingAreaUseCase`)
-- 구역 타입 분류 (`ZoneType`)
+- 경로 시각화 및 주행 안내: 계산된 경로를 지도 위에 Polyline으로 그리고, 사용자의 이동에 따라 지도 중심과 방향이 자동으로 따라오는 기본적인 내비게이션 기능을 제공합니다.
 
-### 주소 / 위치 서비스
-- 주소 검색 (`SearchAddressUseCase`)
-- 역지오코딩 (`ReverseGeocodeUseCase`)
-- 상세 주소 조회 (`GetDetailedAddressUseCase`)
-- 재난 구역 조회 (`GetDisasterZonesUseCase`)
+- 특수 구역 표시: 화재, 침수 등 재난 상황을 가정한 특정 구역을 지도 위에 반투명 오버레이로 표시합니다.
 
-### 경로 안내 UI
-- 회전 안내 (`MajorTurnInstruction`, `TurnType`)
-- 경로 목록 (`RouteAdapter`)
+## 기술 스택 및 주요 라이브러리
+- Platform: Android (Kotlin)
 
-### 채팅
-- 사용자 간 채팅 (`ChatMessage`, `ChatAdapter`)
+- Map Rendering: [osmdroid](https://github.com/graphhopper/graphhopper)
 
-## 프로젝트 구조
+- Map source : [openstreetmap](https://tile.openstreetmap.org/)
 
-```
-app/src/main/
-├── assets/
-│   └── south-korea-251016.osm.pbf   # 오프라인 지도 데이터
-├── java/com/dantariun/sat_demo_map/
-│   ├── data/
-│   │   ├── db/           # Room (ShadowZone, TileInfo)
-│   │   ├── model/        # Route, ChatMessage, TurnType 등
-│   │   └── repository/   # RouteRepository, RouteState
-│   ├── domain/
-│   │   └── usecase/      # 경로·주소·재난구역 Use Case
-│   ├── network/          # Retrofit (Geocoding API)
-│   ├── ui/
-│   │   ├── HomeActivity  # 메인 지도 화면
-│   │   ├── SplashActivity
-│   │   └── adapter/      # Route, Chat, Settings Adapter
-│   └── di/               # Hilt Module
-```
+- Routing Engine: [GraphHopper](https://github.com/graphhopper/graphhopper) with [Geofabrik](https://download.geofabrik.de/)
 
-## 시작하기
+- Location Services: Google FusedLocationProviderClient
 
-```bash
-git clone https://github.com/dantariun/offline_naviapp.git
-```
+- Architecture: MVVM, UseCase Pattern
 
-Android Studio Hedgehog 이상, minSdk 28 (Android 9) 필요.
+- Asynchronous Processing: Kotlin Coroutines (Flow)
 
-```bash
-./gradlew assembleDebug
-```
-
-> OSM PBF 파일(`south-korea-251016.osm.pbf`)이 `app/src/main/assets/`에 포함되어 있어 최초 빌드 시 오래 걸릴 수 있다.
-
-## 권한
-
-```xml
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.INTERNET" />  <!-- Geocoding API용 -->
-```
-
-## 주의사항
-
-- 오프라인 경로 계산 엔진(GraphHopper) 초기화는 최초 1회 PBF 파싱이 필요하므로 시간이 소요된다.
-- Geocoding(주소 검색)은 온라인 API를 사용하므로 인터넷 연결이 필요하다.
-- Shadow Zone 데이터는 Room DB에 저장되며, API 또는 수동으로 등록 가능하다.
+- Dependency Injection: Hilt

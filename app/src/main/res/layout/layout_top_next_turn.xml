@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="135dp"
+    android:layout_height="80dp"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="2dp"
+    android:background="@drawable/bg_signs">
+
+
+    <ImageView
+        android:id="@+id/icon_turn"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view_top_area"
+        tools:src="@drawable/icon_turn_left"
+        android:contentDescription="Turn Direction" />
+
+
+    <LinearLayout
+        android:id="@+id/view_top_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        app:layout_constraintTop_toBottomOf="@+id/icon_turn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/text_current_road"
+        >
+
+        <TextView
+            android:id="@+id/text_distance_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="30dp"
+            android:padding="0dp"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            tools:text="1.9"/>
+
+        <!-- 3. 남은 거리 (단위 'km') -->
+        <TextView
+            android:id="@+id/text_distance_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            tools:text="km"
+            android:textColor="@android:color/white"
+            android:textSize="10dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_current_road"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Basílica de Jesús de Medinaceli"
+        android:textColor="@android:color/white"
+        android:maxLines="1"
+        android:textSize="11sp"
+        app:layout_constraintTop_toBottomOf="@+id/view_top_area"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
